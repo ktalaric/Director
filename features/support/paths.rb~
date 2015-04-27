@@ -19,7 +19,7 @@ module NavigationHelpers
     	id = Movie.find_by_title($1).id.to_s
     	"/movies/#{id}/edit"
     when /^details page$/ then
-    	movie_path(Movie.find_by_title($1).id.to_s)
+    	movie_path(Movie.find_by_title($1).id.to_s
     when /the Similar Movies page for "(.*)"$/
     	@movie_id = Movie.find_by_title($1)
     	movie_similar_path(@movie_id)
