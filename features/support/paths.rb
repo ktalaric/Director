@@ -14,15 +14,20 @@ module NavigationHelpers
     case page_name
 
     when /^the home\s?page$/
-      '/movies'
+      movies_path
+
     when /^the edit page for "(.*)"/
-    	id = Movie.find_by_title($1).id.to_s
-    	"/movies/#{id}/edit"
-    when /^details page$/ then
-    	movie_path(Movie.find_by_title($1).id.to_s)
-    when /the Similar Movies page for "(.*)"$/
-    	@movie_id = Movie.find_by_title($1)
-    	movie_similar_path(@movie_id)
+      edit_movie_path(Movie.find_by_title($1))
+
+    when /the details page for "(.*)"$/
+      movie_path(Movie.find_by_title($1))
+
+    when /^the Similar Movies page for "(.*)"$/
+      @movie_id = Movie.find_by_title($1)
+      movie_similar_path(@movie_id)
+
+    when /^the RottenPotatoes home page$/
+      movies_path
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
@@ -42,6 +47,5 @@ module NavigationHelpers
     end
   end
 end
-
 
 World(NavigationHelpers)
